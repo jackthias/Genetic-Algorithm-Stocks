@@ -21,3 +21,4 @@ def create_population(n):
     population = list()
     for _ in range(0, n):
         population.append(random_chromosome())
+    return population
