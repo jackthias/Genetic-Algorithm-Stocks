@@ -1,20 +1,9 @@
 from random import choice, random
-from enum import Enum
 from copy import deepcopy
 
 from fitness import check_fitness
 from chromosome import make_chromosome
 from population import get_buy_short, get_high_low
-
-
-class Selection(Enum):
-    ELITIST = 1
-    TOURNAMENT = 2
-
-
-class Crossover(Enum):
-    UNIFORM = 1
-    K_POINT = 2
 
 
 def elitist(population: list, x: int):
@@ -36,9 +25,8 @@ def tournament(population: list, x: int):
     return winners
 
 
-def selection(selection_type: Selection, population: list, x: int):
-    assert isinstance(selection_type, Selection)
-    if selection_type == Selection.ELITIST:
+def selection(do_elitist: bool, population: list, x: int):
+    if do_elitist:
         return elitist(population, x)
     else:
         return tournament(population, x)
@@ -55,17 +43,17 @@ def k_point(chromosome1: list, chromosome2: list):
     return make_chromosome(*chromosome1[:2], *chromosome2[2:])
 
 
-def crossover(crossover_type: Crossover, breeding_pool: list, pop_size: int):
+def crossover(do_uniform: bool, breeding_pool: list, pop_size: int):
     new_population = deepcopy(breeding_pool)
-    assert isinstance(crossover_type, Crossover)
     for _ in range(0, pop_size-len(breeding_pool)):
         father = choice(breeding_pool)
         mother = choice(breeding_pool)
-        if crossover_type == Crossover.UNIFORM:
+        if do_uniform:
             crossover_func = uniform
         else:
             crossover_func = k_point
         new_population.append(crossover_func(father, mother))
+    return new_population
 
 
 def mutation(population: list, chance_of_mutation: float):

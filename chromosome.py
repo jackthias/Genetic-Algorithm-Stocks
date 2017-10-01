@@ -31,9 +31,3 @@ def fits_chromosome(file, chromosome):
             return False
         i += 2
     return True
-
-test = False
-if test:
-    file_test = [-0.12, -0.81, -6.80]
-    chromosome_test = make_chromosome(0, -5, 0.9, -3.1, 1)
-    print(fits_chromosome(file_test, chromosome_test))

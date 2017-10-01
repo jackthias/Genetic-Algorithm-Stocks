@@ -1,15 +1,10 @@
 from chromosome import fits_chromosome, make_chromosome
-
-files = []
-# files.append("genAlgData1.txt")
-# files.append("genAlgData2.txt")
-files.append("handmadeTest1.txt")
-non_match_penalty = -5000
+from constants import NON_MATCH_PENALTY, FILES
 
 
 def get_all_data():
     formatted_data = list()
-    for file_name in files:
+    for file_name in FILES:
         file_stream = open(file_name, 'r')
         raw_data = file_stream.readlines()
         for line in raw_data:
@@ -38,7 +33,7 @@ def check_fitness(chromosome_to_inspect):
     for entry in data:
         fitness += check_entry(entry, chromosome_to_inspect, match)
     if not match[0]:
-        return non_match_penalty
+        return NON_MATCH_PENALTY
     return fitness
 
-print(check_fitness(make_chromosome(-500000000, -50000001, -0.9, 3.1, 1)))
+

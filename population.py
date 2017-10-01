@@ -1,12 +1,11 @@
 import random
-from chromosome import make_chromosome
 
-standard_var = 1.15
-mean = 0
+from chromosome import make_chromosome
+from constants import STANDARD_VARIATION, MEAN
 
 
 def get_high_low():
-    return random.normalvariate(mean, standard_var)
+    return random.normalvariate(MEAN, STANDARD_VARIATION)
 
 
 def get_buy_short():
