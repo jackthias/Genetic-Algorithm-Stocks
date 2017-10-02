@@ -1,13 +1,14 @@
 from math import ceil
 
-import plotly
-import plotly.plotly as py
-import plotly.graph_objs as go
-
 from breeding import selection, crossover, mutation
 import constants
 from fitness import check_fitness
 from population import create_population
+
+if constants.VISUALIZATION_ACTIVE:
+    import plotly
+    import plotly.plotly as py
+    import plotly.graph_objs as go
 
 
 class Output:
